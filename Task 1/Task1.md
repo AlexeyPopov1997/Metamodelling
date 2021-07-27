@@ -145,5 +145,14 @@ Let's use the implemented metamodels to construct a finite recognizer atom to pa
 
 * ***Graphical representation of a finite state machine***
 
+![StateMachineGraph](https://github.com/AlexeyPopov1997/Metamodelling/blob/master/Task%201/StateMachineGraph.PNG?raw=true)
 
+To test the state machine, let's test it with six different input chains:
+
+* abc — Accept
+* aabbcc — Accept
+* abcccccccc — Accept
+* bababa — Reject
+* c — Reject
+* bca — Reject
 
