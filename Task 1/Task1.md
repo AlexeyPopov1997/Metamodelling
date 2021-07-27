@@ -6,7 +6,7 @@
 
 Метамодель детерминированного конечного автомата-распознователя состоит из трех классов:
 
-* *State (Сотстояние)*
+* *State*
 
 ```c++
 class State {
@@ -35,7 +35,7 @@ class State {
 };
 ```
 
-* *Transition (Переход)*
+* *Transition*
 
 ```c++
 class Transition {
@@ -68,3 +68,82 @@ class Transition {
         ~Transition() {};
 };
 ```
+
+* *StateMachine*
+
+```c++
+class StateMachine {
+    private:
+        std::vector<State> states;
+        std::vector<Transition> transitions;
+        State currentState;
+
+        bool move(char inputTrigger) {
+            bool moveStatus = false;
+            for(Transition transition:transitions) {
+                if ((transition.getSourceState() == currentState.getName()) and (transition.getEvent() == inputTrigger)) {
+                    for(State state:states) {
+                        if (state.getName() == transition.getTargetState()) {
+                            currentState = state;
+                        };
+                    };
+                    moveStatus = true;
+                };
+            };
+            return moveStatus;
+        };
+    
+    public:
+        std::vector<State> getStates() { 
+            return states; 
+        };
+
+        std::vector<Transition> getTransitions() { 
+            return transitions; 
+        };
+
+        State getCurrentState() { 
+            return currentState; 
+        };
+
+        void addState(std::string inputName, bool inputFinalState) {
+            currentState = State(inputName, inputFinalState);
+            states.push_back(currentState);
+        };
+
+        void addTransition(std::string inputSourceState, std::string inputTargetState, char trigger) {
+            transitions.push_back(Transition(inputSourceState, inputTargetState, trigger));
+        };
+
+        bool run(std::string trigger) {
+            for(char event: trigger) {
+                if (move(event) == false) {
+                    return false;
+                };
+            };
+
+            if (currentState.getFinalState()) {
+                return true;
+            }
+            else {
+                return false;
+            };
+        };
+};
+```
+
+
+Let's use the implemented metamodels to construct a finite recognizer atom to parse a string of three symbols **a**, **b**, **c**, consisting of three states **S1**, **S2**, **S3**, and the third of which is admitting.
+
+* ***Tabular representation of a state machine***
+
+| Состояние | a | b | c |
+| --- | --- | --- | --- |
+| S1 | S1 | S2 | - |
+| S2 | S1 | S2 | **S3** |
+| **S3** | S1 | S2 | **S3** |
+
+* ***Graphical representation of a finite state machine***
+
+
+
