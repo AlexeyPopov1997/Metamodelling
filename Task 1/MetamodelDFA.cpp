@@ -116,26 +116,26 @@ class StateMachine {
 };
 
 int main(){
-     StateMachine deterministicFiniteAutomaton;
-     deterministicFiniteAutomaton.addState("S1", false);
-     deterministicFiniteAutomaton.addState("S2", false);
-     deterministicFiniteAutomaton.addState("S3", true);
+     StateMachine dfa;
+     dfa.addState("S1", false);
+     dfa.addState("S2", false);
+     dfa.addState("S3", true);
 
-    deterministicFiniteAutomaton.addTransition("S1", "S1", 'a');
-    deterministicFiniteAutomaton.addTransition("S1", "S2", 'b');
-    deterministicFiniteAutomaton.addTransition("S2", "S2", 'b');
-    deterministicFiniteAutomaton.addTransition("S2", "S1", 'a');
-    deterministicFiniteAutomaton.addTransition("S2", "S3", 'c');
-    deterministicFiniteAutomaton.addTransition("S3", "S1", 'a');
-    deterministicFiniteAutomaton.addTransition("S3", "S2", 'b');
-    deterministicFiniteAutomaton.addTransition("S3", "S3", 'c');
+    dfa.addTransition("S1", "S1", 'a');
+    dfa.addTransition("S1", "S2", 'b');
+    dfa.addTransition("S2", "S2", 'b');
+    dfa.addTransition("S2", "S1", 'a');
+    dfa.addTransition("S2", "S3", 'c');
+    dfa.addTransition("S3", "S1", 'a');
+    dfa.addTransition("S3", "S2", 'b');
+    dfa.addTransition("S3", "S3", 'c');
 
-    std::cout << "Input character string 'abc': " << (deterministicFiniteAutomaton.run("abc")) << std::endl;
-    std::cout << "Input character string 'aabbcc': " << (deterministicFiniteAutomaton.run("aabbcc")) << std::endl;
-    std::cout << "Input character string 'abcccccccc': " << (deterministicFiniteAutomaton.run("abcccccccc")) << std::endl;
-    std::cout << "Input character string 'bababa': " << (deterministicFiniteAutomaton.run("bababa")) << std::endl;
-    std::cout << "Input character string 'c': " << (deterministicFiniteAutomaton.run("c")) << std::endl;
-    std::cout << "Input character string 'bca': " << (deterministicFiniteAutomaton.run("bca")) << std::endl;
+    std::cout << "Input character string 'abc': " << (dfa.run("abc")) << std::endl;
+    std::cout << "Input character string 'aabbcc': " << (dfa.run("aabbcc")) << std::endl;
+    std::cout << "Input character string 'abcccccccc': " << (dfa.run("abcccccccc")) << std::endl;
+    std::cout << "Input character string 'bababa': " << (dfa.run("bababa")) << std::endl;
+    std::cout << "Input character string 'c': " << (dfa.run("c")) << std::endl;
+    std::cout << "Input character string 'bca': " << (dfa.run("bca")) << std::endl;
 
     return 0;
 }

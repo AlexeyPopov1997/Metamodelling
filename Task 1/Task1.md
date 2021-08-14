@@ -2,9 +2,9 @@
 
 ## Description of the metamodel of a deterministic finite state machine for recognizing a random string of characters
 
-Реализация метамодели осуществлена на языке программирования **С++**.
+The metamodel is implemented in the programming language **С++**.
 
-Метамодель детерминированного конечного автомата-распознователя состоит из трех классов:
+The metamodel of a deterministic finate automaton-recognizer consists of three classes:
 
 * *State*
 
@@ -156,3 +156,45 @@ To test the state machine, let's test it with six different input chains:
 * c — Reject
 * bca — Reject
 
+
+## Test
+
+```c++
+int main(){
+     StateMachine dfa;
+     dfa.addState("S1", false);
+     dfa.addState("S2", false);
+     dfa.addState("S3", true);
+
+    dfa.addTransition("S1", "S1", 'a');
+    dfa.addTransition("S1", "S2", 'b');
+    dfa.addTransition("S2", "S2", 'b');
+    dfa.addTransition("S2", "S1", 'a');
+    dfa.addTransition("S2", "S3", 'c');
+    dfa.addTransition("S3", "S1", 'a');
+    dfa.addTransition("S3", "S2", 'b');
+    dfa.addTransition("S3", "S3", 'c');
+
+    std::cout << "Input character string 'abc': " << (dfa.run("abc")) << std::endl;
+    std::cout << "Input character string 'aabbcc': " << (dfa.run("aabbcc")) << std::endl;
+    std::cout << "Input character string 'abcccccccc': " << (dfa.run("abcccccccc")) << std::endl;
+    std::cout << "Input character string 'bababa': " << (dfa.run("bababa")) << std::endl;
+    std::cout << "Input character string 'c': " << (dfa.run("c")) << std::endl;
+    std::cout << "Input character string 'bca': " << (dfa.run("bca")) << std::endl;
+
+    return 0;
+}
+```
+
+### Results
+```
+Input character string 'abc': 1
+Input character string 'aabbcc': 1
+Input character string 'abcccccccc': 1
+Input character string 'bababa': 0
+Input character string 'c': 0
+Input character string 'bca': 0
+```
+
+## Conclusion
+The metamodel is correct.
